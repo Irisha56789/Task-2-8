@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Практическая работа</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #myElement {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 20px;
+        }
+        #formContainer {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Заголовок</h1>
+    <p>Это абзац текста.</p>
+    
+    <ul id="list">
+        <li>Элемент списка 1</li>
+        <li>Элемент списка 2</li>
+        <li>Элемент списка 3</li>
+    </ul>
+
+    <img id="image" src="https://via.placeholder.com/150" alt="Пример изображения">
+
+    <a id="link" href="https://example.com">Ссылка</a>
+
+    <button id="addItemBtn">Добавить элемент</button>
+    <button id="removeItemBtn">Удалить последний элемент</button>
+    <button id="changeColorBtn">Изменить цвет текста</button>
+    <button id="toggleParagraphBtn">Показать/скрыть абзац</button>
+    
+    <div id="myElement">Этот элемент для работы с размерами</div>
+    <button id="getDimensionsButton">Получить размеры элемента</button>
+    
+    <div id="formContainer">
+        <h2>Форма обратной связи</h2>
+        <input type="text" id="name" placeholder="Ваше имя">
+        <input type="email" id="email" placeholder="Ваш email">
+        <button id="submitButton">Отправить</button>
+        <div id="formMessage"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Изменение текста заголовка
+        const header = document.querySelector('h1');
+        header.innerText = 'Новый заголовок'; // Изменяем текст заголовка
+
+        // Получение размеров элемента
+        document.getElementById('getDimensionsButton').addEventListener('click', function() {
+            const element = document.getElementById('myElement');
+            const rect = element.getBoundingClientRect();
+            alert(`Ширина: ${rect.width}, Высота: ${rect.height}`);
+        });
+
+        // Проверка формы
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const messageElement = document.getElementById('formMessage');
+
+            if (name === "" || email === "") {
+                messageElement.textContent = "Пожалуйста, заполните все поля.";
+            } else {
+                messageElement.textContent = "Форма успешно отправлена!";
+                // Здесь можно добавить код для отправки формы, если потребуется
+            }
+        });
+
+        // Добавляем функционал для кнопок, связанных со списком и текстом
+        document.getElementById('addItemBtn').addEventListener('click', function() {
+            const newItem = document.createElement('li');
+            newItem.textContent = `Элемент списка ${document.getElementById('list').children.length + 1}`;
+            document.getElementById('list').appendChild(newItem);
+        });
+
+        document.getElementById('removeItemBtn').addEventListener('click', function() {
+            const list = document.getElementById('list');
+            if (list.children.length > 0) {
+                list.removeChild(list.lastChild);
+            }
+        });
+
+        document.getElementById('changeColorBtn').addEventListener('click', function() {
+            const text = document.getElementById('text');
+            text.style.color = text.style.color === 'red' ? 'black' : 'red';
+        });
+
+        document.getElementById('toggleParagraphBtn').addEventListener('click', function() {
+            const text = document.getElementById('text');
+            text.style.display = text.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
+

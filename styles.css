@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #c40b0b;
+}
+
+#text {
+    color: black; /* Начальный цвет текста */
+    font-size: 16px; /* Начальный размер шрифта */
+}
